@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typing Speed Test</title>
+  <link rel="stylesheet" href="style.css">
+  
+</head>
+<body>
+  <script type="module" src = "logic.js"></script>
+
+  <nav>
+        <select name="mode" id="mode" class="btn">
+          <option value="Easy" class="btn">
+            Easy
+          </option>
+          <option value="Moderate" class="btn" selected>
+            Moderate
+          </option>
+          <option value="Hard" class="btn">
+            Hard
+          </option>
+        </select>
+        
+        <button class="selected btn btns" data-time="30" id="b1">30s</button>
+        <button id="b2" data-time="60" class="btn btns">60s</button>
+        <button id="b3" data-time="120" class="btn btns">120s</button>
+        <button id="b4" data-time="FreeStyle" class="btn btns">Free Style</button>
+        <button id="reset" class="btn">Reset</button>
+  </nav>
+
+  <main>
+    <div class="typeArea">
+    </div>
+    <textarea type="text" placeholder="Type Here" id="hidden-input"></textarea>
+  </main>
+
+  <div class="result">
+    <div id="speed">
+      <p>Speed: 00</p>
+    </div>
+    <div id="acc">
+      <p>Accuracy: 00</p>
+    </div>
+  </div>
+</body>
+</html>
