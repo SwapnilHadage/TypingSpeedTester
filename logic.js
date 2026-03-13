@@ -84,7 +84,7 @@ function startTest(){
 
   const typedChar = userText.value[prevLen];
   
-  if(typedChar === ' '){
+  if(sentence[prevLen] && sentence[prevLen] === " "){
     ++words;
     console.log("start test words",words);
     }
