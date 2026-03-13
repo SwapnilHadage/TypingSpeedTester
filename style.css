@@ -16,6 +16,7 @@ body{
   align-items: center;
   overflow-x: hidden;
   background-color: white;
+  overflow-y: hidden;
 }
 nav{
   width: calc(100% - 2rem);
@@ -94,7 +95,6 @@ main{
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  overflow-y: scroll;
 }
 
 #hidden-input{
@@ -127,18 +127,17 @@ main{
 
 
 .typeArea{
-  margin: auto;
+  margin: 2rem;
   width: 100%;
   max-width: 80ch;
   height: 30ch;
   position: relative;
-
   user-select: none;
   overflow-wrap: break-word;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
-  outline: 3px solid rgb(34, 30, 30);
-  border-radius: 5PX; /* nasndnslc*/
+  border: solid 0.18rem black;
+  border-radius: 10px; 
   padding: clamp(1rem, 3vw,2rem);
   z-index: 1;
 }
@@ -176,32 +175,45 @@ main{
 }
 
 @media (max-width:600px) {
-  nav{
+  body{
     justify-content: space-evenly;
+    padding: 1rem 0;
+    
+  }
+  nav{
     gap:0.2rem;
     font-size: 1rem;
     margin: 0.2rem;
   }
   nav .btn{
     box-shadow: 2px 2px 0 0 black;
+    font-weight: 350;
   }
   .typeArea{
-    min-height: 180px;
+    height: 40ch;
+    margin: 0.3rem;
+  }
+  .result{
+    font-size: 0.9rem;
+    margin: 0.3rem;
   }
 }
-@media (min-width: 675px) {
-  
+@media (max-width: 900px){
   nav{
-    padding-right: 2rem;
-    gap:2rem;
-  /* .nav2{
-    padding: 0.5rem;
-  } */
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.8rem;
+    font-size: 1.5rem;
   }
+
   .btn{
-    font-size: 1.3rem;
-    font-weight: 500;
+    font-size: 0.95rem;
   }
+
+  .typeArea{
+    max-width: 95%;
+  }
+
 }
 @media (orientation: portrait) {
   .typeArea{

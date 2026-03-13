@@ -1,4 +1,4 @@
-import { levelWiseSentences, randomSentences } from "./data.js";
+import { randomSentences } from "./data.js";
 
 const typeArea = document.querySelector(".typeArea");
 let userText = document.querySelector("textarea");
@@ -9,6 +9,7 @@ let cursor = document.createElement("span");
 cursor.classList.add("cursor");
 cursor.classList.add("stop");
 const wordEndChars = ['\u00A0', '.', ',', ';', ':', '!', '?', '"', "'", '(', ')', '{', '}', '[', ']', '/'];
+let mode = "moderate";
 let sentence;
 let spans = [];
 let firstInput;
@@ -20,7 +21,6 @@ let RAF_id = null;
 let correctLetterCount=0;
 let selectedBtn = document.querySelector('#b1'); //default selected btn..
 const btns = document.querySelectorAll(".btns");
-const btnVals = ["30s", "60s", "120s", "FreeStyle"];
 let begin = ()=>{
   userText.focus();
 }
@@ -33,8 +33,8 @@ document.querySelector("#reset").addEventListener("click", setInitialState);
 
 for( const btn of btns){
   if(btn.textContent === "Reset") continue;
+
   btn.addEventListener("click", (e) => {
-    console.log(btn.textContent);
     
     btn.classList.add('selected');
     for (const b of btns) {
@@ -42,27 +42,36 @@ for( const btn of btns){
     }
 
     selectedBtn = btn;
-    let maxTime = selectedBtn.textContent;
     if (btn.id === 'b4') {
       freeStyle = true;
       duration = 0;
     }else{
-      maxTime = maxTime.slice(0,maxTime.length-1);
-      maxTime = Number(maxTime);
-      console.log(maxTime);
-      duration = maxTime;
+      duration = Number(btn.dataset.time);
       freeStyle = false;
     }
+
+    console.log(btn.textContent);
+    
     setInitialState(freeStyle);
     userText.focus();
   }
 );
 }
+const selector = document.querySelector("#mode");
+selector.addEventListener("change", ()=>{
+  mode = selector.value;
+  setInitialState(freeStyle);
+})
 
 function startTest(){
+  console.log("entered startTest");
+  
   if(firstInput){
     startTimer(duration, selectedBtn, freeStyle);
     firstInput = false;
+  }
+  if(userText.value.length > sentence.length){
+    userText.value = userText.value.slice(0, sentence.length);
   }
 
   if(userText.value.length <= sentence.length && userText.value.length > 0){
@@ -77,6 +86,7 @@ function startTest(){
   
   if(typedChar === ' '){
     ++words;
+    console.log("start test words",words);
     }
     
   if( typedChar === spans[prevLen].textContent){
@@ -123,8 +133,10 @@ function startTimer(maxTime, btn, freeStyle) {
         if (userText.value.length === sentence.length && sentence.at(-1) === ' ') {
             words++;
           }
+          
         showResult(words, timePassed, correctLetterCount, sentence.length);
-        return
+        cancelAnimationFrame(RAF_id)
+        RAF_id = null
       }else{
         RAF_id = requestAnimationFrame(updateTimer);
         }
@@ -135,36 +147,52 @@ function startTimer(maxTime, btn, freeStyle) {
   }
 
 function updateCursor(idx){
-    if (!spans[idx]) {
+    const char = spans[idx]
+    if (!char) {
       return;
     }
-    const parent = typeArea.getBoundingClientRect(); // textArea dimensions
-    const char = spans[idx].getBoundingClientRect(); //spans[idx] dimensions
-    cursor.style.left = `${char.left - parent.left}px`;
-    cursor.style.top = `${char.top - parent.top + char.height}px`;
+    //---scroll logic----
+    const lineTop = spans[idx].parentElement.offsetTop;
+    const lineBottom = lineTop + spans[idx].parentElement.offsetHeight;
+    const viewTop = typeArea.scrollTop;
+    const viewBottom = viewTop + typeArea.clientHeight;
+
+    if(lineBottom > viewBottom){
+      typeArea.scrollTop = lineBottom - typeArea.clientHeight + 20;
+    }else{
+      if(lineTop < viewTop){
+        typeArea.scrollTop = lineTop-10;
+      }
+    }
+    // --cursor position--
+    cursor.style.left = `${char.offsetLeft}px`;
+    cursor.style.top = `${char.offsetTop + char.offsetHeight}px`;
     cursor.style.height = `${3}px`;
-    cursor.style.width = `7px`;
+    cursor.style.width = `${char.offsetWidth}px`;
+    
   }
 
 function showResult(words, time, correctLetterCount, len){
   resultDiv.classList.add("show");
-  speed.innerText = "Speed: "+`${(words*60/(time)).toFixed(2)}`;
+  speed.innerText = `Speed: ${(words*60/(time)).toFixed(2)}wpm`;
   console.log(speed.innerText);
 
-  accuracy.innerText = "Accuracy: "+`${(correctLetterCount*100/len).toFixed(2)}`;
+  accuracy.innerText = `Accuracy:  ${(correctLetterCount*100/len).toFixed(2)}%`;
   console.log(accuracy.innerText);
     
   }
 
 function setInitialState (FreeStyle){
+
+  //Reset Events
   typeArea.removeEventListener("click", begin);
   userText.removeEventListener("input", startTest);
-
   typeArea.addEventListener("click", begin);
   userText.addEventListener("input", startTest);
 
+    //reset btn Vals
     btns.forEach((node, i) => {
-      node.textContent = btnVals[i];
+      node.textContent = node.dataset.time;
     });
     correctLetterCount = 0;
     freeStyle = FreeStyle;
@@ -188,8 +216,8 @@ function setInitialState (FreeStyle){
     spans = [];
     const divs = [];
     typeArea.textContent = ''
-    
-    sentence = randomSentences[Math.floor(Math.random()*randomSentences.length)];
+    const list = randomSentences[mode];
+    sentence = list[Math.floor(Math.random() * list.length)];
     sentence.split("").forEach(char => {
       const span = document.createElement("span")
 
@@ -204,7 +232,6 @@ function setInitialState (FreeStyle){
       })
 
     let div = document.createElement("div");
-
     spans.forEach((span, i)=>{
       if(wordEndChars.includes(span.textContent) || i === sentence.length-1){
         div.appendChild(span);
