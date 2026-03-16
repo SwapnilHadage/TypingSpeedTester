@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 310 120" role="img" aria-labelledby="KIVO-logo">
+        <title id="KIVO-logo">KIVO Logo</title>
+
+        <!-- Mirrored tall arrow (points left) - tip placed to exactly touch K's vertical stroke edge (no overlap) -->
+        <polygon points="95,20 10,60 95,100" fill="#2563EB"/>
+
+        <!-- K (only vertical stroke) - drawn so the arrow tip touches its right edge (stroke-width 10 -> right edge at x=45) -->
+        <path d="M40 20 L40 100"
+              stroke="#111111" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+        <!-- I -->
+        <line x1="120" y1="20" x2="120" y2="100"
+              stroke="#111111" stroke-width="10" stroke-linecap="round"/>
+
+        <!-- V -->
+        <path d="M140 20 L170 100 L200 20"
+              stroke="#111111" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+        <!-- O (speed gauge) -->
+        <circle cx="260" cy="60" r="38"
+                stroke="#111111" stroke-width="10" fill="none"/>
+
+        <!-- Gauge needle -->
+        <line x1="260" y1="60" x2="285" y2="40"
+              stroke="#2563EB" stroke-width="6" stroke-linecap="round"/>
+</svg>
