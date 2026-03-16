@@ -27,18 +27,28 @@ A browser-based typing speed test built with HTML, CSS, and JavaScript.
 
 ---
 
+## Preview 
+<img src="preview/preview1.png" width="550" alt="UI preview image"/>
+<img src="preview/preview2.png" width="550" alt="UI preview image">
+
+---
+
 ## Files
 
 ```
 project/
 │ 
-├── index.html        # App HTML structure and controls
-├── style.css         # Application styling and responsive rules           
+├── index.html         # App HTML structure and controls
+├── style.css          # Application styling and responsive rules           
 ├── scripts/
-│    ├── data.js      # `randomSentences` export used as sentence data
-│    └── logic.js     # Main app logic (ES module) 
-└── assets/
-     └── logo.svg
+│    ├── data.js       # `randomSentences` export used as sentence data
+│    └── logic.js      # Main app logic (ES module) 
+├──  assets/          
+│    └── logo.svg      # KIVO logo
+└──preview/            # UI preview images 
+     ├── preview1.png      
+     └── preview2.png
+
 ```
 
 > `data.js` exports a named object `randomSentences` with keys `easy`, `moderate`, and `hard`.
