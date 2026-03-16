@@ -180,8 +180,6 @@ function showResult(words, time, correctLetterCount, len){
   }
 
 function setInitialState (FreeStyle){
-  console.log(mode);
-  
   //Reset Events
   typeArea.removeEventListener("click", begin);
   userText.removeEventListener("input", startTest);

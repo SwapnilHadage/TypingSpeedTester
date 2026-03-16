@@ -5,13 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Typing Speed Test</title>
   <link rel="stylesheet" href="style.css">
-  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script type="module" src = "logic.js"></script>
 </head>
 <body>
-  <script type="module" src = "logic.js"></script>
+  
 
   <nav>
-        <select name="mode" id="mode" class="btn">
+    <div class="logo">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 310 120" role="img" aria-labelledby="KIVO-logo">
+        <title id="KIVO-logo">KIVO Logo</title>
+
+        <!-- Mirrored tall arrow (points left) - tip placed to exactly touch K's vertical stroke edge (no overlap) -->
+        <polygon points="95,20 10,60 95,100" fill="#2563EB"/>
+
+        <!-- K (only vertical stroke) - drawn so the arrow tip touches its right edge (stroke-width 10 -> right edge at x=45) -->
+        <path d="M40 20 L40 100"
+              stroke="#111111" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+        <!-- I -->
+        <line x1="120" y1="20" x2="120" y2="100"
+              stroke="#111111" stroke-width="10" stroke-linecap="round"/>
+
+        <!-- V -->
+        <path d="M140 20 L170 100 L200 20"
+              stroke="#111111" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+        <!-- O (speed gauge) -->
+        <circle cx="260" cy="60" r="38"
+                stroke="#111111" stroke-width="10" fill="none"/>
+
+        <!-- Gauge needle -->
+        <line x1="260" y1="60" x2="285" y2="40"
+              stroke="#2563EB" stroke-width="6" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="navbar">
+        <select name="mode" id="mode" class="btn" aria-label="Select Mode or Difficulty Level" >
           <option value="easy" class="btn" selected>
             Easy
           </option>
@@ -21,28 +51,29 @@
           <option value="hard" class="btn">
             Hard
           </option>
-        </select>
-        
-        <button class="selected btn btns" data-time="30" id="b1">30s</button>
-        <button id="b2" data-time="60" class="btn btns">60s</button>
-        <button id="b3" data-time="120" class="btn btns">120s</button>
-        <button id="b4" data-time="FreeStyle" class="btn btns">Free Style</button>
-        <button id="reset" class="btn">Reset</button>
+      </select>
+      <button class="selected btn btns" data-time="30" id="b1">30s</button>
+      <button id="b2" data-time="60" class="btn btns" >60s</button>
+      <button id="b3" data-time="120" class="btn btns">120s</button>
+      <button id="b4" data-time="♾️" class="btn btns">♾️</button>
+      <button id="reset" class="btn">Reset</button>
+    </div>
   </nav>
 
   <main>
-    <div class="typeArea">
+    <div class="typeArea" role="region" aria-label="Text to type" aria-hidden="true">
     </div>
-    <textarea type="text" placeholder="Type Here" id="hidden-input"></textarea>
+    <textarea type="text" placeholder="Type Here" id="hidden-input" aria-label="Typing area"  ></textarea>
   </main>
 
   <div class="result">
-    <div id = "speed">
+    <div id = "speed" aria-live="polite">
       <p>Speed: </p>
     </div>
-    <div id="acc">
+    <div id="acc" aria-live="polite" >
       <p>Accuracy: </p>
     </div>
   </div>
+
 </body>
 </html>

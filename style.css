@@ -17,20 +17,55 @@ body{
   overflow-x: hidden;
   background-color: white;
   overflow-y: hidden;
+  padding:  1rem;
 }
 nav{
   width: calc(100% - 2rem);
   margin: 1rem;
   height: auto;
   min-height: 4rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  padding: 0;
+
+  border: solid 0.18rem black;
+  border-radius: 10px;
+}
+.logo{
+  margin: 0;
+  width:6rem;
+  flex:0 0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding-left: 1rem;
+}
+svg polygon{
+fill:#3b82f6;
+}
+.logo svg{
+  width:100%;
+  height:auto;
+  display:block;
+  padding: 0;
+  margin: 0;
+}
+.selectMode{
+  width: auto;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+}
+.navbar{
+  flex: 1;
   padding: 0.9rem;
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
   gap: 2rem;
-
-  border: solid 0.18rem black;
-  border-radius: 10px;
 }
 select:focus{
   outline: none;
@@ -125,7 +160,6 @@ main{
   }
 }
 
-
 .typeArea{
   margin: 2rem;
   width: 100%;
@@ -142,7 +176,7 @@ main{
   overflow-x: hidden;
   border: solid 0.18rem black;
   border-radius: 10px;
-  padding: clamp(1rem, 3vw,2rem);
+  padding: clamp(1rem, 3vw,2rem); 
   z-index: 1;
 }
 .typeArea div{
@@ -178,32 +212,11 @@ main{
   background-color: yellow;
 }
 
-@media (max-width:600px) {
-  body{
-    justify-content: space-evenly;
-    padding: 1rem 0;
-    
-  }
-  nav{
-    gap:0.2rem;
-    font-size: 1rem;
-    margin: 0.2rem;
-  }
-  nav .btn{
-    box-shadow: 2px 2px 0 0 black;
-    font-weight: 350;
-  }
-  .typeArea{
-    height: 40ch;
-    margin: 0.3rem;
-  }
-  .result{
-    font-size: 0.9rem;
-    margin: 0.3rem;
-  }
-}
 @media (max-width: 900px){
   nav{
+
+  }
+  .navbar{
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 0.8rem;
@@ -219,26 +232,47 @@ main{
   }
 
 }
+
+@media (max-width:600px) {
+  body{
+    justify-content: space-evenly;
+    padding: 1rem 0;
+  }
+  nav{
+    gap:0;
+    font-size: 1rem;
+    margin: 0.2rem;
+  }
+  .logo{
+    padding-left: 5px;
+    padding-right: 0;
+    width:5rem;
+  }
+  .logo svg{
+    
+    padding: 0;
+    margin: 0;
+  }
+  .navbar{
+    padding: 0.5rem;
+  }
+  .navbar .btn{
+    box-shadow: 2px 2px 0 0 black;
+    font-weight: 525;
+  }
+  .typeArea{
+    height: 40ch;
+    margin: 0.3rem;
+  }
+  .result{
+    font-size: 0.9rem;
+    margin: 0.3rem;
+  }
+}
+
 @media (orientation: portrait) {
   .typeArea{
     min-height: 200px;
     margin: 1rem;
   }
 }
-
-
-
-/* @media (min-width:32px) {
-  nav{
-    padding: 1.3rem;
-  }
-  .nav2{
-    padding: 0.2rem;
-  }
-  .nav2{
-    p{
-      font-size: 0.5rem;
-    }
-  }
-  
-} */
